@@ -38,9 +38,10 @@ contract Lottery {
         address winner = players[r % players.length];
         gameWinners.push(winner);
 
-        players = new address[](0);
         (bool success, ) = winner.call{ value: address(this).balance }('');
         require(success, 'Failed to send funds');
+
+        delete players;
     }
 
 
